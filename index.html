@@ -618,9 +618,9 @@
   </div>
 
   <!-- Hidden audio element for background music -->
-  <audio id="background-music" loop>
-    <source src="Having You Near Me (Air Supply) instrumental cover with lyrics by #artzkie.mp3" type="audio/mpeg">
-  </audio>
+ <audio id="background-music" loop muted="muted">
+  <source src="Having You Near Me.mp3" type="audio/mpeg">
+</audio>
 
   <!-- Screen 1: Boot Sequence -->
   <div id="screen-boot" class="screen flex-col items-center justify-center min-h-full p-6">
@@ -840,16 +840,16 @@
     }
 
     if (username === correctUsername && password === correctPassword) {
-      errorEl.textContent = '';
-      // Start the music
-      const audio = document.getElementById('background-music');
-      audio.play().catch(err => console.log('Audio autoplay prevented:', err));
-      
-      setTimeout(() => {
-        showScreen('screen-boot');
-        startBootSequence();
-      }, 500);
-    } else {
+  errorEl.textContent = '';
+  const audio = document.getElementById('background-music');
+  audio.muted = false;  // Unmute after user interaction
+  audio.play().catch(err => console.error('Playback failed:', err));
+  
+  setTimeout(() => {
+    showScreen('screen-boot');
+    startBootSequence();
+  }, 500);
+} else {
       errorEl.textContent = 'Incorrect username or password. Try again!';
       document.getElementById('password-input').value = '';
     }
