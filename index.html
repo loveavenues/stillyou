@@ -45,6 +45,69 @@
     .btn-shadow { box-shadow:0 2px 8px rgba(0,0,0,.12); }
     .btn-shadow:hover { box-shadow:0 4px 12px rgba(0,0,0,.2); }
 
+    /* Passcode Styles */
+    .passcode-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #ddd;
+      border: 2px solid #1a1a1a;
+      transition: all 0.2s ease;
+    }
+    .passcode-dot.filled {
+      background: #1a1a1a;
+      transform: scale(1.1);
+    }
+    .passcode-btn {
+      aspect-ratio: 1;
+      width: 100%;
+      padding: 12px;
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .passcode-btn:hover {
+      background: #fff;
+      border-color: #1a1a1a;
+      transform: scale(1.05);
+    }
+    .passcode-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Login Input Styles */
+    #username-input,
+    #password-input {
+      padding: 16px 24px;
+      font-size: 1rem;
+      background: #ddd !important;
+      color: #1a1a1a !important;
+      border: none !important;
+      border-radius: 999px !important;
+      outline: none !important;
+      font-family: 'Quicksand', sans-serif;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    }
+
+    #username-input::placeholder,
+    #password-input::placeholder {
+      color: rgba(26,26,26,0.5);
+    }
+
+    #username-input:focus,
+    #password-input:focus {
+      background: #bbb !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,.2) !important;
+    }
+
     /* Tic Tac Toe Board */
     .ttt-board {
       display: grid;
@@ -303,6 +366,29 @@
       h2 {
         font-size: 1.3rem;
       }
+
+      /* Login Screen Tablet */
+      #screen-passcode h1 {
+        font-size: 2.5rem !important;
+      }
+
+      #screen-passcode p {
+        font-size: 1.1rem !important;
+      }
+
+      #username-input,
+      #password-input {
+        padding: 16px 24px !important;
+        font-size: 1rem !important;
+        background: #ddd !important;
+        color: #1a1a1a !important;
+      }
+
+      #btn-login {
+        padding: 14px 44px !important;
+        font-size: 1.05rem !important;
+        background: #1a1a1a !important;
+      }
     }
 
     @media (max-width: 480px) {
@@ -407,6 +493,47 @@
       .font-mono-custom {
         font-size: 0.75rem;
       }
+
+      .passcode-btn {
+        padding: 10px;
+        font-size: 1rem;
+      }
+
+      /* Login Screen Mobile Styles */
+      #screen-passcode {
+        padding: 16px 12px !important;
+      }
+
+      #screen-passcode h1 {
+        font-size: 2rem !important;
+        margin-bottom: 8px !important;
+      }
+
+      #screen-passcode p {
+        font-size: 1rem !important;
+      }
+
+      .w-full.max-w-sm {
+        padding: 0 !important;
+      }
+
+      #username-input,
+      #password-input {
+        padding: 14px 20px !important;
+        font-size: 0.95rem !important;
+        background: #ddd !important;
+        color: #1a1a1a !important;
+      }
+
+      #btn-login {
+        padding: 12px 40px !important;
+        font-size: 1rem !important;
+        background: #1a1a1a !important;
+      }
+
+      .space-y-6 {
+        gap: 1.2rem !important;
+      }
     }
 
     @media (max-width: 360px) {
@@ -422,14 +549,81 @@
         font-size: 1rem;
         letter-spacing: 1.5px;
       }
+
+      #screen-passcode h1 {
+        font-size: 1.8rem !important;
+      }
+
+      #username-input,
+      #password-input {
+        padding: 12px 16px !important;
+        font-size: 0.9rem !important;
+        background: #ddd !important;
+        color: #1a1a1a !important;
+      }
+
+      #btn-login {
+        padding: 10px 32px !important;
+        font-size: 0.95rem !important;
+        background: #1a1a1a !important;
+      }
     }
   </style>
 </head>
 <body class="h-full font-body">
 <div id="app-wrapper" class="h-full w-full overflow-auto" style="background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 30%, #e8e8e8 100%);">
 
+  <!-- Screen 0: Passcode -->
+  <div id="screen-passcode" class="screen active flex-col items-center justify-center min-h-full p-6" style="background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 30%, #e8e8e8 100%);">
+    <div class="w-full max-w-sm">
+      <div class="text-center mb-12">
+        <h1 class="font-body text-4xl font-bold mb-3" style="color:#1a1a1a;">lovingyou.com</h1>
+        <p class="font-body text-lg" style="color:#666;">Log in before continue</p>
+      </div>
+
+      <div class="space-y-6">
+        <div>
+          <label class="font-body text-lg font-semibold mb-2 block" style="color:#555;">Username</label>
+          <input 
+            type="text" 
+            id="username-input" 
+            placeholder="Enter your username" 
+            class="w-full py-4 px-6 rounded-full font-body text-base" 
+            style="background:#ddd;color:#1a1a1a;border:none;outline:none;" 
+          />
+        </div>
+
+        <div>
+          <label class="font-body text-lg font-semibold mb-2 block" style="color:#555;">Password</label>
+          <input 
+            type="password" 
+            id="password-input" 
+            placeholder="Enter your password" 
+            class="w-full py-4 px-6 rounded-full font-body text-base" 
+            style="background:#ddd;color:#1a1a1a;border:none;outline:none;" 
+          />
+        </div>
+
+        <div class="text-right">
+          <a href="#" class="font-body text-base font-semibold" style="color:#1a1a1a;">Forgot Password?</a>
+        </div>
+
+        <button id="btn-login" class="w-full py-4 px-6 rounded-full font-body text-lg font-semibold text-white btn-shadow transition-all hover:scale-105 mx-auto block" style="background:#1a1a1a;width:fit-content;padding:12px 48px;">
+          Log in
+        </button>
+
+        <p id="login-error" class="font-body text-sm text-center" style="color:#1a1a1a; min-height:20px;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden audio element for background music -->
+  <audio id="background-music" loop>
+    <source src="Having You Near Me (Air Supply) instrumental cover with lyrics by #artzkie.mp3" type="audio/mpeg">
+  </audio>
+
   <!-- Screen 1: Boot Sequence -->
-  <div id="screen-boot" class="screen active flex-col items-center justify-center min-h-full p-6">
+  <div id="screen-boot" class="screen flex-col items-center justify-center min-h-full p-6">
     <div class="w-full max-w-sm">
       <div class="bg-white rounded-2xl p-6 card-shadow mb-6">
         <div class="flex items-center gap-3 mb-4">
@@ -552,17 +746,17 @@
           <div class="ticket-stars">★ ★ ★</div>
           
           <div class="ticket-title">Always You</div>
-          <div style="font-size: 1.2rem; color: #888; margin-bottom: 8px;">Since 2025</div>
+          <div style="font-size: 1.2rem; color: #888; margin-bottom: 8px;">13 Months Strong</div>
           
           <div class="ticket-divider"></div>
           
           <div class="ticket-message">
-            A celebration of us, of moments we've shared, and all the ones yet to come.
+            A celebration of us, of every moment we've shared, and all the ones yet to come.
           </div>
           
           <div class="ticket-divider"></div>
           
-          <div class="ticket-date">November 12, 2025</div>
+          <div class="ticket-date">December 12, 2024 - January 12, 2026</div>
           <div class="ticket-footer">NO. 1 | Valid Forever</div>
         </div>
       </div>
@@ -581,7 +775,7 @@
     <div class="w-full max-w-sm relative z-10">
       <div class="bg-white rounded-2xl p-6 card-shadow mb-4 text-center">
         <div class="mb-2"><span class="font-mono-custom text-xs px-3 py-1 rounded-full" style="background:#f5f5f5;color:#1a1a1a;border: 1px solid #ddd;">LETTER.txt</span></div>
-        <h1 class="font-body text-2xl font-bold mt-3" style="color:#1a1a1a;">A Month of Us 💫</h1>
+        <h1 class="font-body text-2xl font-bold mt-3" style="color:#1a1a1a;">13 Months of Us 💫</h1>
       </div>
 
       <div class="letter-paper letter-unfold">
@@ -589,12 +783,20 @@
           <svg class="w-8 h-8 mx-auto heart-beat" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
           <p class="font-mono-custom text-xs mt-1" style="color:#888;">REFLECTING ON US</p>
         </div>
-        <div class="space-y-3 font-body text-sm" style="color:#555;">
-          <p class="letter-line" style="animation-delay:0.2s;">My love,</p>
-          <p class="letter-line" style="animation-delay:0.5s;">A month has passed, and I'm still amazed by you every single day. The way you make ordinary moments feel special, the way you laugh, the way you care — it all means the world to me.</p>
-          <p class="letter-line" style="animation-delay:0.9s;">Every memory we've shared, every inside joke, every late-night conversation — they've all shaped what we have. I cherish each and every one of these moments with you.</p>
-          <p class="letter-line" style="animation-delay:1.3s;">Thank you for being you. Thank you for choosing me. I'm excited for all the memories we're yet to create together.</p>
-          <p class="letter-line" style="animation-delay:1.7s; text-align:right; font-style:italic; font-weight:600;">All my love,<br>Your Person 💫</p>
+        <div class="space-y-3 font-body text-sm" style="color:#555; line-height: 1.8;">
+          <p class="letter-line" style="animation-delay:0.1s;"><span style="font-weight: 600;">A year and one month.</span> Thinking of all that we have been through, shared, and survived as a couple, that feels like an entire lifetime through many nights spent awake, talks, laughs, misunderstandings, reassurance, patience, and love. Thank you for being there. Thank you for choosing us even on the days when it's tough to figure out what I am feeling, when life is overwhelming, and when it feels like the future is uncertain.</p>
+          
+          <p class="letter-line" style="animation-delay:0.4s;">I know hindi naging madali lahat. We've learned how to navigate through tough talks, adjustments, waiting, overthinking, letting emotions get the best of us, and the constant reminder of why we started. We manage to find our way back to each other after every argument.</p>
+          
+          <p class="letter-line" style="animation-delay:0.7s;">You became my peace after a day filled with stress, and the person I always want to talk to first. Everything feels better because it involves you.</p>
+          
+          <p class="letter-line" style="animation-delay:1.0s;">I love how caring you are. I love how hard you try. I love your gentleness, your strength, your attitude, your smile, your voice, your kiss, your everything (lalo na smell hehe). And even after 13 months, I can still find myself staring at you like I've just fallen in love with you for the very first time.</p>
+          
+          <p class="letter-line" style="animation-delay:1.3s;">You have become one of the best things to happen to me. I hope we keep growing together. More months. More memories. More random calls. More kisses. More "I miss you" & "I love you" messages. More laughter. More pikunan. More love.</p>
+          
+          <p class="letter-line" style="animation-delay:1.6s;">But there is one thing that I want you to take away from this letter, and that is that no matter what else may come, I will never stop being thankful for having loved someone as wonderful as you. No words can express how much I love you, Adi.</p>
+          
+          <p class="letter-line" style="animation-delay:1.9s; text-align:center; font-style:italic; font-weight:600; font-size:1.1rem;">Happy 13th month, baby.<br>I love you so much 🤍</p>
         </div>
       </div>
 
@@ -613,7 +815,7 @@
 
 <script>
   // ===================== SCREEN MANAGER =====================
-  const screenIds = ['screen-boot','screen-ttt','screen-message','screen-memories','screen-ticket','screen-letter'];
+  const screenIds = ['screen-passcode','screen-boot','screen-ttt','screen-message','screen-memories','screen-ticket','screen-letter'];
 
   function showScreen(id) {
     screenIds.forEach(sid => {
@@ -623,11 +825,50 @@
     });
   }
 
+  // ===================== LOGIN =====================
+  const correctUsername = '13months';
+  const correctPassword = '042125';
+
+  document.getElementById('btn-login').addEventListener('click', () => {
+    const username = document.getElementById('username-input').value.trim();
+    const password = document.getElementById('password-input').value.trim();
+    const errorEl = document.getElementById('login-error');
+
+    if (!username || !password) {
+      errorEl.textContent = 'Please enter both username and password';
+      return;
+    }
+
+    if (username === correctUsername && password === correctPassword) {
+      errorEl.textContent = '';
+      // Start the music
+      const audio = document.getElementById('background-music');
+      audio.play().catch(err => console.log('Audio autoplay prevented:', err));
+      
+      setTimeout(() => {
+        showScreen('screen-boot');
+        startBootSequence();
+      }, 500);
+    } else {
+      errorEl.textContent = 'Incorrect username or password. Try again!';
+      document.getElementById('password-input').value = '';
+    }
+  });
+
+  // Allow Enter key to submit
+  document.getElementById('password-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      document.getElementById('btn-login').click();
+    }
+  });
+
   // ===================== BOOT =====================
-  setTimeout(() => {
-    showScreen('screen-ttt');
-    initTTT();
-  }, 3000);
+  function startBootSequence() {
+    setTimeout(() => {
+      showScreen('screen-ttt');
+      initTTT();
+    }, 3000);
+  }
 
   // ===================== TIC TAC TOE =====================
   let board = Array(9).fill(null);
